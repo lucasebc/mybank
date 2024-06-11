@@ -13,6 +13,7 @@ import CustomInputComponent from "./CustomInputComponent";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { signIn, signUp } from "@/lib/actions/user.actions";
 
 const AuthForm = ({ type }: AuthFormProps) => {
   const router = useRouter();
@@ -49,7 +50,6 @@ const AuthForm = ({ type }: AuthFormProps) => {
           email: values.email,
           password: values.password,
         });
-
         if (response) router.push("/");
       }
 
@@ -66,7 +66,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
   }
 
   return (
-    <section className="auth-form">
+    <div className="auth-form">
       <header className="flex flex-col gap-5 md:gap-8">
         <Link href="/" className="cursor-pointer items-center gap-1 flex">
           <Image
@@ -96,7 +96,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               {type === "sign-up" && (
                 <>
-                  <div className="flex gap-4">
+                  {/* <div className="flex gap-4">
                     <CustomInputComponent
                       control={form.control}
                       name="firstName"
@@ -116,6 +116,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
                     placeholder="Enter your address"
                     label="Address"
                   />
+                  <CustomInputComponent control={form.control} name="city" placeholder="Enter your city" label="City" />
                   <div className="flex gap-4">
                     <CustomInputComponent control={form.control} name="state" placeholder="ex: NY" label="State" />
                     <CustomInputComponent
@@ -133,7 +134,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
                       label="Birth date"
                     />
                     <CustomInputComponent control={form.control} name="ssn" placeholder="Enter your SSN" label="SSN" />
-                  </div>
+                  </div> */}
                 </>
               )}
               <CustomInputComponent
@@ -172,7 +173,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
           </footer>
         </>
       )}
-    </section>
+    </div>
   );
 };
 

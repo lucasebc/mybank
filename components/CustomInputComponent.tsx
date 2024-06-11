@@ -22,21 +22,23 @@ const CustomInputComponent = ({ control, name, label, placeholder, type }: Custo
       control={control}
       name={name}
       render={({ field }) => (
-        <div className="form-item">
-          <FormLabel className="form-label">{label}</FormLabel>
-          <div className="flex w-full flex-col">
-            <FormControl>
-              <Input
-                id={name}
-                placeholder={placeholder}
-                className="input-class"
-                {...(type && { type: type })}
-                {...field}
-              ></Input>
-            </FormControl>
-            <FormMessage className="form-message mt-2"></FormMessage>
+        <>
+          <div className="form-item">
+            <FormLabel className="form-label">{label}</FormLabel>
+            <div className="flex w-full flex-col">
+              <FormControl>
+                <Input
+                  id={name}
+                  placeholder={placeholder}
+                  className="input-class"
+                  {...(type && { type: type })}
+                  {...field}
+                ></Input>
+              </FormControl>
+              {/* <FormMessage className="form-message mt-2"></FormMessage> */}
+            </div>
           </div>
-        </div>
+        </>
       )}
     />
   );
