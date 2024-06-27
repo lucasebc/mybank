@@ -12,8 +12,6 @@ const Footer = ({ user, type }: FooterProps) => {
     if (loggedOut) router.push("/sign-in");
   };
 
-  console.log(user);
-
   return (
     <footer className="footer">
       <div className={type === "mobile" ? "footer_name-mobile" : "footer_name"}>

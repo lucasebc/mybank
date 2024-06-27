@@ -13,9 +13,6 @@ export default async function RootLayout({
 
   if (!user) redirect("/sign-in");
 
-  console.log("meu ovo esquerdo demonho cu pinto buceta");
-  console.log(user);
-
   return (
     <main className="flex h-screen w-full font-inter">
       <Sidebar user={user} />
