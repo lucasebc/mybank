@@ -1,14 +1,24 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from "react-plaid-link";
-import { StyledString } from "next/dist/build/swc";
 import { useRouter } from "next/navigation";
 import { createLinkToken, exchangePublicToken } from "@/lib/actions/user.actions";
+import Image from "next/image";
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const router = useRouter();
 
   const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const getLinkToken = async () => {
+      const data = await createLinkToken(user);
+
+      setToken(data?.linkToken);
+    };
+
+    getLinkToken();
+  }, [user]);
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>(
     async (public_token: string) => {
@@ -29,26 +39,22 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
 
   const { open, ready } = usePlaidLink(config);
 
-  useEffect(() => {
-    const getLinkToken = async () => {
-      const data = await createLinkToken(user);
-
-      setToken(data?.lnikToken);
-    };
-
-    getLinkToken();
-  }, [user]);
-
   return (
     <>
       {variant === "primary" ? (
-        <Button className="plaidlink-primary" onClick={() => open()}>
+        <Button onClick={() => open()} disabled={!ready} className="plaidlink-primary">
           Connect bank
         </Button>
       ) : variant === "ghost" ? (
-        <Button>Connect bank</Button>
+        <Button onClick={() => open()} className="plaidlink-ghost" variant="ghost">
+          <Image src="/icons/connect-bank.svg" alt="connect bank" width={24} height={24} />
+          <p className="font-semibold text-black-2 text-[16px] xl:block">Connect bank</p>
+        </Button>
       ) : (
-        <Button>Connect bank</Button>
+        <Button onClick={() => open()} className="plaidlink-default">
+          <Image src="/icons/connect-bank.svg" alt="connect bank" width={24} height={24} />
+          <p className="font-semibold text-black-2 text-[16px]">Connect bank</p>
+        </Button>
       )}
     </>
   );

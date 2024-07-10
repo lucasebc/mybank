@@ -2,6 +2,7 @@ import { formatAmount } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Copy from "./Copy";
 
 const BankCardComponent = ({ account, showBalance, userName }: CreditCardProps) => {
   return (
@@ -28,6 +29,7 @@ const BankCardComponent = ({ account, showBalance, userName }: CreditCardProps) 
           <Image src="/icons/lines.png" alt="lines" width={316} height={190} className="absolute top-0 left-0"></Image>
         </div>
       </Link>
+      {showBalance && <Copy title={account?.shareableId} />}
     </div>
   );
 };
